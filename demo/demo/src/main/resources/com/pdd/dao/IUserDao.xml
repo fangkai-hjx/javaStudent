@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pdd.dao.IUserDao">
+    <resultMap id="userAccountsMap" type="user">
+        <id property="id" column="id"></id>
+        <result property="username" column="username"></result>
+        <result property="address" column="address"></result>
+        <result property="sex" column="sex"></result>
+        <result property="birthday" column="birthday"></result>
+        <!--配置account集合-->
+        <collection property="roles" ofType="role">
+            <id column="rid" property="roleId"></id>
+            <result column="role_name" property="roleName"></result>
+            <result column="role_desc" property="roleDesc"></result>
+        </collection>
+    </resultMap>
+    <select id="findAll" resultMap="userAccountsMap">
+        SELECT u.*,r.* from user u left join user_role ur on u.id = ur.uid
+                                   left join role r on r.id = ur.rid;
+    </select>
+</mapper>
