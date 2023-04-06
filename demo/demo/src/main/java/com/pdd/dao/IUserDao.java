@@ -14,4 +14,6 @@ public interface IUserDao {
     List<User> findUserByName(String name);
 
     Integer findTotal();
+
+    User findById(Integer id);
 }

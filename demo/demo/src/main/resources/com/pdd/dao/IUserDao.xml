@@ -15,9 +15,15 @@
             <result column="role_name" property="roleName"></result>
             <result column="role_desc" property="roleDesc"></result>
         </collection>
+        <collection property="accounts" ofType="account" select="com.pdd.dao.IAccountDao.findByUid" column="id">
+        </collection>
     </resultMap>
     <select id="findAll" resultMap="userAccountsMap">
-        SELECT u.*,r.* from user u left join user_role ur on u.id = ur.uid
-                                   left join role r on r.id = ur.rid;
+        <!--SELECT u.*,r.* from user u left join user_role ur on u.id = ur.uid
+                                   left join role r on r.id = ur.rid;-->
+        select * from user;
+    </select>
+    <select id="findById" resultType="user" parameterType="int">
+        select * from user where id = #{id}
     </select>
 </mapper>

@@ -1,7 +1,6 @@
 package com.pdd.test;
 
 import com.pdd.dao.IUserDao;
-import com.pdd.dao.impl.IUserDaoImpl;
 import com.pdd.domain.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -13,10 +12,10 @@ import org.apache.ibatis.io.Resources;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Date;
+import java.sql.Time;
 import java.util.List;
 
-public class TestDemo {
+public class UserDemo {
     private SqlSession session;
     private InputStream is;
     private IUserDao userDao;
@@ -38,19 +37,18 @@ public class TestDemo {
     @Test
     public void test()  {
         List<User> users = userDao.findAll();
-        for (User user : users) {
-            System.out.println(user);
-        }
+//        for (User user : users) {
+//            System.out.println(user);
+//        }
+        System.out.println(users);
     }
 
 
 
     @Test
-    public void selectByName() throws IOException {
-        List<User> users = userDao.findUserByName("%王%");
-        for (User user : users) {
-            System.out.println();
-        }
+    public void findById() throws IOException {
+        User user = userDao.findById(41);
+        System.out.println(user);
     }
 
     @Test

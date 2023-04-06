@@ -8,19 +8,25 @@
         <result property="uid" column="uid"></result>
         <result property="money" column="money"></result>
         <!--1对1的关系映射，配置封装user的内容-->
-        <association property="user" column="user" javaType="user">
-            <id property="id" column="id"></id>
-            <result property="username" column="username"></result>
-            <result property="address" column="address"></result>
-            <result property="sex" column="sex"></result>
-            <result property="birthday" column="birthday"></result>
+        <association property="user" column="uid"  javaType="user" select="com.pdd.dao.IUserDao.findById">
         </association>
+<!--        <association property="user" column="user" javaType="user">-->
+<!--            <id property="id" column="id"></id>-->
+<!--            <result property="username" column="username"></result>-->
+<!--            <result property="address" column="address"></result>-->
+<!--            <result property="sex" column="sex"></result>-->
+<!--            <result property="birthday" column="birthday"></result>-->
+<!--        </association>-->
     </resultMap>
     <select id="findAll" resultMap="accountUserMap">
-        select a.*,u.username,u.address from account a,user u  where a.uid = u.id;
+        <!--select a.*,u.username,u.address from account a,user u  where a.uid = u.id;-->
+        select * from account;
     </select>
     <!--查询所有账户同时包含用户名和地址信息-->
     <select id="findAllAccount" resultType="accountUser">
         select a.*,u.username,u.address from account a,user u  where a.uid = u.id;
+    </select>
+    <select id="findByUid" resultType="account" parameterType="int">
+        select * from account  where uid = #{uid};
     </select>
 </mapper>

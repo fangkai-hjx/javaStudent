@@ -41,10 +41,10 @@ public class AccountTestDemo {
     @Test
     public void findALl() throws IOException {
         List<Account> accounts = accountDao.findAll();
-        for (Account account : accounts) {
-            System.out.println(account.getUser());
-            System.out.println(account);
-        }
+//        for (Account account : accounts) {
+//            System.out.println(account.getUser());
+//            System.out.println(account);
+//        }
     }
 
     @Test

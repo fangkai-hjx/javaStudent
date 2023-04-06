@@ -13,7 +13,6 @@ public class IUserDaoImpl implements IUserDao {
         this.factory = factory;
     }
 
-    @Override
     public List<User> findAll() {
         SqlSession sqlSession = factory.openSession();
         List<User> list = sqlSession.selectList("com.pdd.dao.IUserDao.findAll");
@@ -21,13 +20,15 @@ public class IUserDaoImpl implements IUserDao {
         return list;
     }
 
-    @Override
     public List<User> findUserByName(String name) {
         return null;
     }
 
-    @Override
     public Integer findTotal() {
+        return null;
+    }
+
+    public User findById(Integer id) {
         return null;
     }
 }
