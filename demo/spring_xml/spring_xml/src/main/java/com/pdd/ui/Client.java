@@ -29,10 +29,12 @@ public class Client {
         // 1 获取核心容器对象
         ApplicationContext ac = new ClassPathXmlApplicationContext("bean.xml");
         // 2 根据id获取bean对象
+
         IAccountService accountService1 = (IAccountService)ac.getBean("accountService");
         IAccountService accountService2 = (IAccountService)ac.getBean("accountService");
 //        IAccountDao accountDao = ac.getBean("accountDao",IAccountDao.class);
-        System.out.println(accountService1==accountService2);
+        System.out.println(accountService1);
+        accountService1.saveAccount();
         ClassPathXmlApplicationContext a = (ClassPathXmlApplicationContext)ac;
         a.close();
 //        System.out.println(accountDao);
