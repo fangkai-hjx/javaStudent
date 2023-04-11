@@ -13,10 +13,14 @@
     <!--开启注解扫描-->
     <context:component-scan base-package="com.pdd"></context:component-scan>
     <!--视图解析起-->
-    <bean id ="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="prefix" value="/WEB-INF/"></property>
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"></property>
         <property name="suffix" value=".jsp"></property>
     </bean>
+    <!--前端控制器：哪些静态资源不拦截 location:请求路径-->
+    <mvc:resources location="/js/" mapping="/js/**"></mvc:resources>
+    <mvc:resources location="/images/" mapping="/images/**"></mvc:resources>
+    <mvc:resources location="/css/" mapping="/css/**"></mvc:resources>
     <!--开始springmvc框架注解的支持-->
-    <mvc:annotation-driven></mvc:annotation-driven>
+    <mvc:annotation-driven/>
 </beans>
