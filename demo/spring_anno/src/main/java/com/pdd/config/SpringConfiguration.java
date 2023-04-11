@@ -20,8 +20,9 @@ import javax.sql.DataSource;
  * @PropertySource:指定properties文件的位置，关键字 classpath表示类路径下
  */
 //@Configuration
-@ComponentScan(basePackages = {"com.pdd.dao.impl","com.pdd.service.impl","com.pdd.config"})
+@ComponentScan(basePackages = {"com.pdd"})
 @Import({JDBConfig.class})
+@EnableAspectJAutoProxy
 @PropertySource(value = "classpath:jdbcConfig.properties")
 public class SpringConfiguration {
 

@@ -26,7 +26,7 @@ public class JDBConfig {
 
 
     @Bean(name = "runner")
-    public QueryRunner createQueryRunner(DataSource dataSource){
+    public QueryRunner createQueryRunner(@Qualifier("ds1") DataSource dataSource){
         return new QueryRunner(dataSource);
     }
 
@@ -44,7 +44,8 @@ public class JDBConfig {
             throw new RuntimeException(e);
         }
     }
-    @Bean(name = "datasource2")
+
+    @Bean(name = "ds1")
     public ComboPooledDataSource createDataSource2()  {
         try{
             ComboPooledDataSource ds = new ComboPooledDataSource();
