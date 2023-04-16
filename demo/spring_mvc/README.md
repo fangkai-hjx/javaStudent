@@ -142,3 +142,84 @@ Spring MVC注解：
 ----
 
 文件上传
+
+---
+
+Spring的异常处理
+
+1异常处理思路
+
+1 Controller调用service，service调用dao，异常欧式向上抛出的，最终有DispatcherServlet找异常处理器进行异常的处理。
+
+2 SpringMVC的异常处理
+
+​	1 自定义异常类
+
+```java
+/**
+ * 自定义异常类
+ */
+public class SysException extends Exception{
+    // 存储提示信息的
+    private String message;
+
+    public SysException(String message){
+        this.message = message;
+    }
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+}
+```
+
+
+
+
+
+![image-20230411235244223](/Users/fangkaif/Library/Application Support/typora-user-images/image-20230411235244223.png)
+
+```java
+
+/**
+ * 异常处理器
+ */
+public class SysExceptionResolver implements HandlerExceptionResolver {
+    /**
+     * 处理异常的业务逻辑
+     * @param httpServletRequest
+     * @param httpServletResponse
+     * @param o
+     * @param e
+     * @return
+     */
+    @Override
+    public ModelAndView resolveException(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) {
+        // 获取到异常信息
+        SysException sysException = null;
+        if (e instanceof SysException){
+            sysException = (SysException) e;
+        }else {
+            sysException = new SysException("系统正在维护...");
+        }
+        //创建modelAndView
+        ModelAndView view = new ModelAndView();
+        view.addObject("errorMsg",e.getMessage());
+        view.setViewName("error");
+        return view;
+    }
+}
+```
+
+```java
+  <bean id="sysExceptionResolver" class="com.pdd.exception.SysExceptionResolver"></bean>
+```
+
+---
+
+拦截器：
+
