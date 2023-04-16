@@ -59,6 +59,7 @@ public class OrderInfoServiceImpl extends ServiceImpl<OrderInfoMapper, OrderInfo
      */
     @Override
     public void saveCodeUrl(String orderNo, String codeUrl) {
+        // test
         UpdateWrapper<OrderInfo> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("order_no",orderNo);
         OrderInfo orderInfo = new OrderInfo();
